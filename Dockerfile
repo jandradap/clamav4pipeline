@@ -1,4 +1,4 @@
-FROM alpine:latest
+FROM alpine:3.14
 WORKDIR /scanner
 RUN apk add --no-cache \
     bash \
