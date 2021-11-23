@@ -4,7 +4,7 @@ MAX_RETRIES=5
 DATA_DIR="/clamavdb"
 
 function updatedb() {
-	/usr/bin/freshclam --datadir=$DATA_DIR --config-file=/etc/clamav/freshclam.conf
+	/usr/bin/freshclam --datadir=$DATA_DIR --config-file=/etc/clamav/freshclam.conf --log=/tmp/update.log
 }
 
 function check-db-integrity() {
