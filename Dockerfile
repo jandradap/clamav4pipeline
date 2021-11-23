@@ -53,7 +53,8 @@ COPY check.sh /
 RUN chown clamav_user:clamav /etc/ssl/certs
 
 RUN chown clamav_user:clamav bootstrap.sh check.sh /etc/clamav /etc/clamav/clamd.conf /etc/clamav/freshclam.conf /var/log/clamav/clamav.log /var/log/clamav/freshclam.log && \
-    chmod u+x bootstrap.sh check.sh
+    chmod u+x bootstrap.sh check.sh \
+    && chmod 777 /var/log/clamav/freshclam.log
 
 USER 1000
 
