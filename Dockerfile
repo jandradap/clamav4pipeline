@@ -7,7 +7,7 @@ RUN apk add --no-cache \
     wget \
     clamav-libunrar
 RUN mkdir "/clamavdb"
-RUN chown 100:101 "/clamavdb"
+RUN chown -R 1001 /clamavdb /var/log/clamav/
 COPY freshclam.conf /etc/clamav/freshclam.conf
 COPY db-update.sh ./
 
@@ -20,3 +20,5 @@ ONBUILD RUN ./db-update.sh
 
 ENV PATH="/scanner:${PATH}"
 COPY scan.sh ./
+
+USER 1001
