@@ -1,4 +1,4 @@
-FROM alpine:3.14
+FROM mirror.gcr.io/library/alpine:3.14
 WORKDIR /scanner
 RUN apk add --no-cache \
     bash \
