@@ -6,8 +6,12 @@ RUN apk add --no-cache \
     rsyslog \
     wget \
     clamav-libunrar
-RUN mkdir "/clamavdb"
-RUN chown 100:101 "/clamavdb"
+
+RUN mkdir "/clamavdb" \
+  && chown 100:101 "/clamavdb" \
+  && touch /tmp/update.log \
+  && chmod 777 /tmp/update.log
+
 COPY freshclam.conf /etc/clamav/freshclam.conf
 COPY db-update.sh ./
 
