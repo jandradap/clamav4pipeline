@@ -8,7 +8,7 @@ RUN apk add --no-cache \
     clamav-libunrar
 
 RUN mkdir "/clamavdb" \
-  && chown 100:101 "/clamavdb" \
+  && chown 777 "/clamavdb" \
   && touch /tmp/update.log \
   && chmod 777 /tmp/update.log
   
