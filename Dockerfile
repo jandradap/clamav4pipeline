@@ -33,7 +33,7 @@ RUN sed -i 's/^Foreground .*$/Foreground true/g' /etc/clamav/clamd.conf && \
     sed -i 's/^Foreground .*$/Foreground true/g' /etc/clamav/freshclam.conf
 
 # permission juggling
-RUN mkdir /var/run/clamav && \
+RUN mkdir /var/run/clamav /scanner && \
     chown clamav:clamav /var/run/clamav && \
     chmod 750 /var/run/clamav && \
     chown -R clamav:clamav /var/log/clamav/
@@ -47,16 +47,17 @@ EXPOSE 3310
 COPY freshclam.conf /usr/local/etc/freshclam.conf
 COPY clamd.conf /usr/local/etc/clamd.conf
 
-COPY bootstrap.sh /
-COPY check.sh /
+WORKDIR /scanner
+
+COPY scan.sh /scanner
+
+ENV PATH="/scanner:${PATH}"
 
 RUN chown clamav_user:clamav /etc/ssl/certs
 
-RUN chown clamav_user:clamav bootstrap.sh check.sh /etc/clamav /etc/clamav/clamd.conf /etc/clamav/freshclam.conf /var/log/clamav/clamav.log /var/log/clamav/freshclam.log && \
-    chmod u+x bootstrap.sh check.sh \
+RUN chown clamav_user:clamav /etc/clamav /etc/clamav/clamd.conf /etc/clamav/freshclam.conf /var/log/clamav/clamav.log /var/log/clamav/freshclam.log && \
+    chmod +x /scanner/scan.sh \
     && chmod 777 /var/log/clamav/freshclam.log \
     && chmod  777 /var/lib/clamav
 
 USER 1000
-
-#CMD ["/bootstrap.sh"]
