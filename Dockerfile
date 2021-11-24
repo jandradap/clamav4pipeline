@@ -51,6 +51,8 @@ WORKDIR /scanner
 
 COPY scan.sh /scanner
 
+ENV PATH="/scanner:${PATH}"
+
 RUN chown clamav_user:clamav /etc/ssl/certs
 
 RUN chown clamav_user:clamav /etc/clamav /etc/clamav/clamd.conf /etc/clamav/freshclam.conf /var/log/clamav/clamav.log /var/log/clamav/freshclam.log && \
