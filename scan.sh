@@ -34,7 +34,7 @@ done
 if [ -n "${SCAN_DIR}" ] && [ -n "${LOG_FILE}" ] ; 
 then
 	echo "Scanning directory $SCAN_DIR"
-	if /usr/bin/clamscan -d /clamavdb -vr ${SCAN_DIR} --log=$LOG_FILE; then
+	if /usr/bin/clamscan -vr ${SCAN_DIR} --log=$LOG_FILE; then
         	echo "Scan completed, detailed report in $LOG_FILE"
         	exit 0
 	else
